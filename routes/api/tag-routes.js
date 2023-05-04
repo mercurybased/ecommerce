@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const { Tag, Product, ProductTag } = require('../../models');
+//TODO:does ProductTag need to be referenced
+
 
 // The `/api/tags` endpoint
 //TAG

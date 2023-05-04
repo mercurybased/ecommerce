@@ -3,7 +3,7 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
-router.get('/', (req, res) => {
+router.get('/categories', (req, res) => {
   Category.findAll({
     include:[Product]
   }).then(categories=>{
