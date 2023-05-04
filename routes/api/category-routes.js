@@ -24,7 +24,7 @@ router.get('/:id', (req, res) => {
     res.json(category)
   }).catch(err=>{
     console.log(err);
-    res.status(500).json({msg:"error occurred",err})
+    res.status(500).json({msg:"error occurred"})
   })
 });
 
@@ -42,14 +42,14 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   Category.update({
-    category_name:req.body.product_name
+    category_name:req.body.category_name
   },{
     where:{
       id:req.params.id
     }
   }).then(editCategory=>{
     if(!editCategory[0]){
-      return res.status(404).json({msg:"no product with that id in this database!"})
+      return res.status(404).json({msg:"no category with that id in this database!"})
     }
     res.json(editCategory)
   }).catch(err=>{
