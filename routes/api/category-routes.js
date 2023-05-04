@@ -3,7 +3,7 @@ const { Category, Product } = require('../../models');
 
 // The `/api/categories` endpoint
 
-router.get('/categories', (req, res) => {
+router.get('/', (req, res) => {
   Category.findAll({
     include:[Product]
   }).then(categories=>{
@@ -15,7 +15,7 @@ router.get('/categories', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Category.findByPK(req.params.id,{
+  Category.findByPk(req.params.id,{
     include:[Product]
   }).then(category=>{
     if(!category){
@@ -30,9 +30,9 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   Category.create({
-    product_name:req.body.product_name
-  }).then(newProduct=>{
-    res.json(newProduct)
+    category_name:req.body.category_name
+  }).then(newCategory=>{
+    res.json(newCategory)
   }).catch(err=>{
     console.log(err);
     res.status(500).json({msg:"error occurred",err})

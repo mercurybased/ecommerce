@@ -7,7 +7,7 @@ const { Tag, Product, ProductTag } = require('../../models');
 //TAG
 router.get('/', (req, res) => {
   Tag.findAll({
-    include:[Product]
+    include:[{model: Product, through: ProductTag, as: 'product_tags'}]
   }).then(tags=>{
     res.json(tags)
   }).catch(err=>{
@@ -20,8 +20,8 @@ router.get('/', (req, res) => {
 // find a single tag by its `id`
 // be sure to include its associated Product data
 router.get('/:id', (req, res) => {
-  Tag.findByPK(req.params.id,{
-    include:[Product]
+  Tag.findByPk(req.params.id,{
+    include:[{model: Product, through: ProductTag, as: 'product_tags'}]
   }).then(tags=>{
     if(!tags){
       return res.status(404).json({msg:"no tags with that id",err})
@@ -46,7 +46,6 @@ router.post('/', (req, res) => {
 });
 
 // update a tag's name by its `id` value
-router.put('/:id', (req, res) => {
   router.put('/:id', (req, res) => {
     Tag.update({
       tag_name:req.body.tag_name
@@ -64,8 +63,6 @@ router.put('/:id', (req, res) => {
       res.status(500).json({msg:"error occurred",err})
     })
   });
-  
-});
 
 // delete on tag by its `id` value
 router.delete('/:id', (req, res) => {

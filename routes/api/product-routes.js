@@ -5,12 +5,28 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // get all products
 router.get('/', (req, res) => {
+  Product.findAll({
+    include:[{model:Category},{model:Tag,through:ProductTag, as: 'product_tags'}]
+  }).then(products=>{
+    res.json(products)
+  }).catch(err=>{
+    console.log(err)
+    res.status(500).json({msg:"error",err})
+  })
   // find all products
   // be sure to include its associated Category and Tag data
 });
 
 // get one product
 router.get('/:id', (req, res) => {
+  Product.findByPk(req.params.id,{
+    include:[{model:Category},{model:Tag,through:ProductTag, as: 'product_tags'}]
+  }).then(products=>{
+    res.json(products)
+  }).catch(err=>{
+    console.log(err)
+    res.status(500).json({msg:"error",err})
+  })
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
 });
@@ -90,6 +106,19 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+  Product.destroy({
+    where:{
+      id:req.params.id
+    }
+  }).then(delProduct=>{
+    if(!delProduct){
+      return res.json(404).json({msg:"no product with this id in the database"})
+    }
+    res.json(delProduct)
+  }).catch(err=>{
+    console.log(err);
+        res.status(500).json({msg:"error occurred",err})
+  })
   // delete one product by its `id` value
 });
 
