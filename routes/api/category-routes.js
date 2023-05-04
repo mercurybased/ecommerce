@@ -15,11 +15,17 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-  Category.findByPK(req.params.id{
+  Category.findByPK(req.params.id,{
     include:[Product]
+  }).then(category=>{
+    if(!category){
+      return res.status(404).json({msg:"no category with that id",err})
+    }
+    res.json(category)
+  }).catch(err=>{
+    console.log(err);
+    res.status(500).json({msg:"error occurred",err})
   })
-  // find one category by its `id` value
-  // be sure to include its associated Products
 });
 
 router.post('/', (req, res) => {
