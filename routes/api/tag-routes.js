@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const { Tag, Product, ProductTag } = require('../../models');
-//TODO:does ProductTag need to be referenced
 
 
 // The `/api/tags` endpoint
-//TAG
 router.get('/', (req, res) => {
   Tag.findAll({
     include:[{model: Product, through: ProductTag, as: 'product_tags'}]
