@@ -24,7 +24,8 @@ Clone this repo and enter the following steps in your integrated terminal in VSC
 4. exit your sql shell by entering `exit` 
 5. from there, enter `npm run seed` to integrate the data into the table
 6. enter `npm run watch` to start your server
-7. once you have insomnia open, follow along to this walkthrough video: https://drive.google.com/file/d/1nz9HRqNpdNChRF2r8qMGFdVz7-AjOJXB/view
+
+walkthrough video (insomnia included): https://drive.google.com/file/d/1kYwbvShnaTMOHyOwyUcH-kQaTaAuKNHL/view
 
 
 ## Credits
